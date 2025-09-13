@@ -1,53 +1,70 @@
-📦 API ASBancoDeDados
+# 📦 API ASBancoDeDados
 
 Esta é uma API REST desenvolvida em Java com Spring Boot, focada em gerenciamento de produtos e categorias, utilizando MongoDB como banco de dados.
 
-🧩 Entidades
-📁 Categoria
+---
 
-A entidade Categoria agrupa os produtos. Possui os seguintes campos:
+## 🧩 Entidades
 
-id: Identificador único da categoria (ObjectId do MongoDB)
+### 📁 Categoria
 
-nomeCategoria: Nome da categoria (String)
+A entidade **Categoria** agrupa os produtos. Possui os seguintes campos:
 
-produtos: Lista de produtos associados (List<Produto>)
+- `id`: Identificador único da categoria (`ObjectId do MongoDB`)
 
-📦 Produto
+- `nomeCategoria`: Nome da categoria (`String`)
 
-A entidade Produto representa os itens cadastrados. Possui os seguintes campos:
+- `produtos`: Lista de produtos associados (`List<Produto>`)
 
-id: Identificador único do produto (ObjectId do MongoDB)
+---
 
-nomeProduto: Nome do produto (String)
+### 📦 Produto
 
-precoProduto: Preço do produto (int)
+A entidade **Produto** representa os itens cadastrados. Possui os seguintes campos:
 
-categoria: Categoria à qual o produto pertence (referência a Categoria no MongoDB)
+- `id`: Identificador único do produto (`ObjectId do MongoDB`)
 
-🌐 Endpoints
-🔹 Categoria: /categorias
-Método	Endpoint	Descrição
-GET	/	Retorna todas as categorias e seus produtos
-GET	/{id}	Retorna uma categoria específica pelo ID
-POST	/	Cria uma nova categoria
-PUT	/{id}	Atualiza uma categoria existente
-DELETE	/{id}	Exclui uma categoria pelo ID
-🔹 Produto: /produtos
-Método	Endpoint	Descrição
-GET	/	Retorna todos os produtos e suas categorias
-GET	/{id}	Retorna um produto específico pelo ID
-POST	/	Cria um novo produto
-PUT	/{id}	Atualiza um produto existente
-DELETE	/{id}	Exclui um produto pelo ID
-🚀 Tecnologias utilizadas
+- `nomeProduto `: Nome do produto (`String`)
 
-Java 21
+- `precoProduto`: Preço do produto (`int`)
+  
+- `categoria`: Categoria à qual o produto pertence (`referência a Categoria no MongoDB`)
 
-Spring Boot
+---
 
-Spring Data MongoDB
+## 🌐 Endpoints
+### 🔹 Categoria: `/categorias`
 
-MongoDB (com conexão via MongoDB Compass)
+| Método | Endpoint     | Descrição                                                                 |
+|--------|--------------|---------------------------------------------------------------------------|
+| GET    | `/`          | Retorna uma lista **paginada** de categorias e seus produtos              |
+| GET    | `/{id}`      | Retorna uma **categoria específica** pelo ID                              |
+| POST   | `/`          | Cria uma nova categoria (`nomeCategoria`)                                 |
+| PUT    | `/{id}`      | Atualiza uma categoria existente                                           |
+| DELETE | `/{id}`      | Exclui uma categoria pelo ID                                               |
 
-RESTful API
+---
+
+### 🔹 Produto: `/produtos`
+
+| Método | Endpoint     | Descrição                                                                 |
+|--------|--------------|---------------------------------------------------------------------------|
+| GET    | `/`          | Retorna todos os produtos com suas respectivas categorias (`DTO`)         |
+| GET    | `/{id}`      | Retorna um produto específico pelo ID                                     |
+| POST   | `/`          | Cria um novo produto (`nomeProduto`, `precoProduto`, `categoriaId`)       |
+| PUT    | `/{id}`      | Atualiza um produto existente                                             |
+| DELETE | `/{id}`      | Exclui um produto pelo ID                                                 |
+
+---
+
+## 🚀 Tecnologias utilizadas
+
+- Java 21
+
+- Spring Boot
+
+- Spring Data MongoDB
+
+- MongoDB (com conexão via MongoDB Compass)
+
+- RESTful API
