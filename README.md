@@ -1,63 +1,90 @@
 # 📦 API ASBancoDeDados
 
-Esta é uma API REST desenvolvida em Java com Spring Boot, focada em gerenciamento de produtos e categorias, utilizando MongoDB como banco de dados.
+Esta é uma API REST desenvolvida em Java com Spring Boot, focada em gerenciar usuários, categorias e avaliações de serviços, utilizando MongoDB como banco de dados.
 
 ---
 
-## 🧩 Entidades
+## 🧩 Collections
 
-### 📁 Categoria
+### 📁 Categorias
 
-A entidade **Categoria** agrupa os produtos. Possui os seguintes campos:
+A entidade **Categoria** agrupa agrupa as avaliações de determinado Serviço. Possui os seguintes campos:
 
 - `id`: Identificador único da categoria (`ObjectId do MongoDB`)
 
-- `nomeCategoria`: Nome da categoria (`String`)
+- `nome`: Nome da categoria (`String`)
 
-- `produtos`: Lista de produtos associados (`List<Produto>`)
+- `descricao`: Lista a categoria da Avaliação (`String`)
 
 ---
 
-### 📦 Produto
+### 👥 Usuarios
 
-A entidade **Produto** representa os itens cadastrados. Possui os seguintes campos:
+A entidade **Usuarios** representa os usuarios cadastrados. Possui os seguintes campos:
 
 - `id`: Identificador único do produto (`ObjectId do MongoDB`)
 
-- `nomeProduto `: Nome do produto (`String`)
+- `nome `: Nome do Usuario (`String`)
 
-- `precoProduto`: Preço do produto (`int`)
+- `email`: E-mail do Usuario (`String`)
   
-- `categoria`: Categoria à qual o produto pertence (`referência a Categoria no MongoDB`)
+
+
+---
+### ⭐ Avaliações
+
+A entidade **Avaliações ** representa as avaliaçções cadastradas pelos Usuarios. Possui os seguintes campos:
+
+- `id`: Identificador único da avaliação (`ObjectId do MongoDB`)
+  
+- `usuario_id`: Referência ao usuário que fez a avaliação (`ObjectId do MongoDB`)
+ 
+- `categoria_id`: Referência à categoria do item avaliado (`ObjectId do MongoDB`)
+
+- `item_avaliado `: Nome do item avaliado (`String`)
+
+- `nota`: Nota atribuída pelo usuário (`Integer`)
+
+- `comentario`: Comentário escrito pelo usuário (`String`)
+
+- `data_avaliacao`: Data em que a avaliação foi registrada (`Date`)
+  
+-  `localizacao`: Localização geográfica do serviço avaliado (objeto `Localizacao` com latitude/longitude; só aparece em avaliações de locais físicos) 🔑
+---
+
+🌐 Endpoints
+
+🔹 Categorias: /categorias
+| Método | Endpoint | Descrição                                     |
+| ------ | -------- | --------------------------------------------- |
+| GET    | `/`      | Retorna todas as categorias cadastradas       |
+| GET    | `/{id}`  | Retorna uma **categoria específica** pelo ID  |
+| POST   | `/`      | Cria uma nova categoria (`nome`, `descricao`) |
+| PUT    | `/{id}`  | Atualiza uma categoria existente              |
+| DELETE | `/{id}`  | Exclui uma categoria pelo ID                  |
+
+🔹 Usuários: /usuarios
+| Método | Endpoint | Descrição                                 |
+| ------ | -------- | ----------------------------------------- |
+| GET    | `/`      | Retorna todos os usuários cadastrados     |
+| GET    | `/{id}`  | Retorna um **usuário específico** pelo ID |
+| POST   | `/`      | Cria um novo usuário (`nome`, `email`)    |
+| PUT    | `/{id}`  | Atualiza um usuário existente             |
+| DELETE | `/{id}`  | Exclui um usuário pelo ID                 |
+
+🔹 Avaliações: /avaliacoes
+| Método | Endpoint | Descrição                                                                                                                      |
+| ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| GET    | `/`      | Retorna todas as avaliações cadastradas                                                                                        |
+| GET    | `/{id}`  | Retorna uma **avaliação específica** pelo ID                                                                                   |
+| POST   | `/`      | Cria uma nova avaliação (`usuario_id`, `categoria_id`, `item_avaliado`, `nota`, `comentario`, `data_avaliacao`, `localizacao`) |
+| PUT    | `/{id}`  | Atualiza uma avaliação existente                                                                                               |
+| DELETE | `/{id}`  | Exclui uma avaliação pelo ID                                                                                                   |
+
 
 ---
 
-## 🌐 Endpoints
-### 🔹 Categoria: `/categorias`
-
-| Método | Endpoint     | Descrição                                                                 |
-|--------|--------------|---------------------------------------------------------------------------|
-| GET    | `/`          | Retorna uma lista **paginada** de categorias e seus produtos              |
-| GET    | `/{id}`      | Retorna uma **categoria específica** pelo ID                              |
-| POST   | `/`          | Cria uma nova categoria (`nomeCategoria`)                                 |
-| PUT    | `/{id}`      | Atualiza uma categoria existente                                           |
-| DELETE | `/{id}`      | Exclui uma categoria pelo ID                                               |
-
----
-
-### 🔹 Produto: `/produtos`
-
-| Método | Endpoint     | Descrição                                                                 |
-|--------|--------------|---------------------------------------------------------------------------|
-| GET    | `/`          | Retorna todos os produtos com suas respectivas categorias (`DTO`)         |
-| GET    | `/{id}`      | Retorna um produto específico pelo ID                                     |
-| POST   | `/`          | Cria um novo produto (`nomeProduto`, `precoProduto`, `categoriaId`)       |
-| PUT    | `/{id}`      | Atualiza um produto existente                                             |
-| DELETE | `/{id}`      | Exclui um produto pelo ID                                                 |
-
----
-
-## 🚀 Tecnologias utilizadas
+## 🚀 Tecnologias do Projeto
 
 - Java 21
 
@@ -68,3 +95,6 @@ A entidade **Produto** representa os itens cadastrados. Possui os seguintes camp
 - MongoDB (com conexão via MongoDB Compass)
 
 - RESTful API
+
+- Gradle
+
